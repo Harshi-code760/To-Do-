@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
-
 {% block main %}
-    <h1>Your Task List</h1>
-    <ul class="task-list">
-        {% for todo in todos %}
-          <li><a href="#">{{ todo.title }}</a></li>
-        {% else %}
-          <li class="placeholder-task">You're all done.... Or are you? Challenge yourself, add some new tasks to accomplish.</li>
-        {% endfor %}       
-    </ul>
+<h1>{{ task.title }}</h1>
+<p>{{ task.description }}</p>
+<p><small>Created at: {{ task.created_at}}</p>
+
+<div class="task-actions">
+    <a href="#" class="btn">Edit</a>
+    <form>
+        <button type="submit" class="btn">Delete</button>
+    </form>
+</div>
 {% endblock %}
