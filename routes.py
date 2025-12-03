@@ -1,6 +1,7 @@
 from app import app
 from flask import render_template, request, redirect, url_for
 from datetime import datetime
+from forms import LoginForm
 
 todos = [
     {
@@ -38,8 +39,12 @@ def all_tasks():
 
 @app.route("/task/<int:task_id>")
 def task(task_id):
-    index = task_id - 1
-    task = todos[index]
+    # index = task_id - 1
+    # task = todos[index]
+    task = None
+    for todo in todos:
+        if todo["id"] == task_id:
+            task = todo
     return render_template("task.html", task=task)    
 
 
@@ -78,3 +83,9 @@ def delete_task(task_id):
     global todos
     todos = [todo for todo in todos if todo["id"] != task_id]
     return redirect(url_for("all_tasks"))
+
+
+@app.route('/login')
+def login():
+    form = LoginForm()
+    return render_template('login.html', form=form)
