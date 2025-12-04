@@ -7,6 +7,7 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import login
 
+
 @login.user_loader
 def load_user(id):
     """ 
@@ -15,6 +16,7 @@ def load_user(id):
         
     """
     return db.session.get(User, int(id))
+
 
 class User(UserMixin, db.Model):
     __tablename__ = "users"
@@ -43,3 +45,4 @@ class Todo(db.Model):
 
     def __repr__(self):
         return f'<Todo id={self.id} title={self.title}>'
+    
